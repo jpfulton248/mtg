@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ collection.collection_name }}</title>
+</head>
+<body>
+    {% include 'menu.html' %}
+    <h1>{{ collection.collection_name }}</h1>
+    <ul>
+    {% for collection_card in collection.collection_cards %}
+        <li>
+            {{ collection_card.card.card_name }}
+            <a href="{{ url_for('crud.edit_card', collection_id=collection.collection_id, card_id=collection_card.collection_card_id) }}">Edit</a>
+            <form action="{{ url_for('crud.delete_card', collection_id=collection.collection_id, card_id=collection_card.collection_card_id) }}" method="post" style="display: inline;">
+                <input type="submit" value="Delete">
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="{{ url_for('crud.add_card', collection_id=collection.collection_id) }}">Add Card</a>
+</body>
+</html>
